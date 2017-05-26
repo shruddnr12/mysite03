@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Repository;
 
+import com.jx372.mysite.exception.UserDaoException;
 import com.jx372.mysite.vo.UserVo;
 
 @Repository
@@ -30,7 +31,7 @@ public class UserDao {
 		return conn;
 	}
 	
-	public UserVo get( Long no ) {
+	public UserVo get( Long no ){
 		UserVo vo = null;
 		
 		Connection conn = null;
@@ -58,7 +59,7 @@ public class UserDao {
 			}
 			
  		}catch( SQLException e ) {
-			e.printStackTrace();
+ 			e.printStackTrace();
 		}finally{
 			try {
 				if( rs != null ) {
@@ -78,7 +79,7 @@ public class UserDao {
 		return vo;
 	}
 	
-	public UserVo get( String email, String password ) {
+	public UserVo get( String email, String password )  throws UserDaoException {
 		UserVo vo = null;
 		
 		Connection conn = null;
@@ -90,7 +91,7 @@ public class UserDao {
 			
 			String sql = 
 				" select no, name" + 
-				"   from user" + 
+				"   from use" + 
 				"  where email=?" +
 				"    and password = password(?)";
 			pstmt = conn.prepareStatement(sql);
@@ -109,7 +110,7 @@ public class UserDao {
 			}
 			
  		}catch( SQLException e ) {
-			e.printStackTrace();
+ 			throw new UserDaoException( "User Not Found" );
 		}finally{
 			try {
 				if( rs != null ) {

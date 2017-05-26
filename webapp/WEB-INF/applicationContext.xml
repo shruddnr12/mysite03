@@ -14,7 +14,7 @@
 
 	<context:annotation-config />
 
-	<context:component-scan base-package="com.jx372.mysite.repository, com.jx372.mysite.service">
+	<context:component-scan base-package="com.jx372.mysite.repository, com.jx372.mysite.service, com.jx372.mysite.exception">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
 		<context:include-filter type="annotation"
